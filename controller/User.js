@@ -16,7 +16,6 @@ export const login = async(req,res)=>{
                 message:"Invalid email or password",
             })
         }
-
         const token = jwt.sign({_id:user._id}, process.env.JWT_SECRET);
         res.status(200).cookie('token', token, {
             expires:new Date(Date.now() + 10*60*1000),
