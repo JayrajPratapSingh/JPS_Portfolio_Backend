@@ -95,7 +95,7 @@ export const contact = async(req, res) =>{
     try{
         const {name, email, message} = req.body;
         const userMessage = `Hey, I am ${name}. My email is ${email}. My message is ${message}`
-        await sendMail(userMessage);
+        await sendMail(name,email,message);
         return res.status(200).json({
             sucess:true,
             message:"Message Sent Sucessfully"

@@ -146,55 +146,50 @@ import {createTransport} from "nodemailer"
 
 // method 6
 
-// export const sendMail = async (text) => {
-  
+export const sendMail = async (name,email,message) => {
+  const transporter = createTransport({
+   service:"gmail",
+    auth: {
+      user: process.env.MY_MAIL,
+      pass: process.env.GOOGLE_PASS,
+    },
+  })
+  await transporter.sendMail({
+    subject: "CONTACT REQUEST FROM PORTFOLIO",
+    from: email,
+    to: process.env.MY_MAIL,
+    text:`Hey, I am: ${name}, My email is: ${email}, My message is: ${message}`,
+  }, )
 
-//   const transporter = createTransport({
-   
-
-//    service:"gmail",
-//     auth: {
-//       user: process.env.MY_MAIL,
-//       pass: process.env.GOOGLE_PASS,
-//     },
-//   })
-
-//   await transporter.sendMail({
-//     subject: "CONTACT REQUEST FROM PORTFOLIO",
-//     from: process.env.MY_MAIL,
-//     to: process.env.MY_MAIL,
-//     text,
-//   }, )
-
-// };
+};
 
 
 
 //By Mailtrap
 
-export const sendMail = async (text) => {
-  const transporter = createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-  });
+// export const sendMail = async (text) => {
+//   const transporter = createTransport({
+//     host: process.env.SMTP_HOST,
+//     port: process.env.SMTP_PORT,
+//     auth: {
+//       user: process.env.SMTP_USER,
+//       pass: process.env.SMTP_PASSWORD,
+//     },
+//   });
 
-  await transporter.sendMail({
-    subject: "CONTACT REQUEST FROM PORTFOLIO",
-    to: process.env.MY_MAIL,
-    from: process.env.MY_MAIL,
-    text,
-  },(err,info)=>{
-    if(err){
-      return err
-    }
-    else{
-      return info
-    }
-  });
-};
+//   await transporter.sendMail({
+//     subject: "CONTACT REQUEST FROM PORTFOLIO",
+//     to: process.env.MY_MAIL,
+//     from: process.env.MY_MAIL,
+//     text,
+//   },(err,info)=>{
+//     if(err){
+//       return err
+//     }
+//     else{
+//       return info
+//     }
+//   });
+// };
 
 
