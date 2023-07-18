@@ -1,29 +1,32 @@
-import nodemailer from "nodemailer"
-import dotenv from "dotenv"
-dotenv.config()
+// import nodemailer from "nodemailer"
+import {createTransport} from "nodemailer"
+
 
 
 //method 1 not working
 
-export const sendMail = async (text) => {
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASSWORD,
-    },
-    secure:false
-  });
+// export const sendMail = async (text) => {
+//   const transporter = nodemailer.createTransport({
+//     host: "smtp.ethereal.email",
+//     port: 587,
+//     auth: {
+//       user: "hailie60@ethereal.email",
+//       pass: "JEbcrhGNnfErNjSXJd",
+//     },
+//     tls:{
+//       rejectUnauthorized:false
+//   },
+//     secure:false
+//   });
 
-  await transporter.sendMail({
-    from: '"CONTACT REQUEST 👩‍💻"<jairajportfolio@gmail.com>',
-    to: process.env.MY_MAIL,
-    subject: "CONTACT REQUEST FROM PORTFOLIO",
-    text,
-  });
-  console.log(text)
-};
+//   await transporter.sendMail({
+//     from: '"CONTACT REQUEST 👩‍💻"<jairajportfolio@gmail.com>',
+//     to: process.env.MY_MAIL,
+//     subject: "CONTACT REQUEST FROM PORTFOLIO",
+//     text,
+//   });
+//   console.log("message sent sucessfully")
+// };
 
 // method 2 -not working
 
@@ -116,3 +119,82 @@ export const sendMail = async (text) => {
 // })
 // console.log(text)
 // }
+
+
+// method 5
+
+// export const sendMail = async (text) => {
+//     const transporter = nodemailer.createTransport({
+//      service:"gmail",
+//       auth: {
+//         user: "jairaj273310@gmail.com",
+//         pass: process.env.GOOGLE_PASS,
+//       },
+//       port:465,
+//       host: "smtp.gmail.com"
+//     });
+  
+//     await transporter.sendMail({
+//       from: '"CONTACT REQUEST 👩‍💻"<jairajportfolio@gmail.com>',
+//       to: process.env.MY_MAIL,
+//       subject: "CONTACT REQUEST FROM PORTFOLIO",
+//       text,
+//     });
+//     console.log("message sent sucessfully")
+//   };
+
+
+// method 6
+
+// export const sendMail = async (text) => {
+  
+
+//   const transporter = createTransport({
+   
+
+//    service:"gmail",
+//     auth: {
+//       user: process.env.MY_MAIL,
+//       pass: process.env.GOOGLE_PASS,
+//     },
+//   })
+
+//   await transporter.sendMail({
+//     subject: "CONTACT REQUEST FROM PORTFOLIO",
+//     from: process.env.MY_MAIL,
+//     to: process.env.MY_MAIL,
+//     text,
+//   }, )
+
+// };
+
+
+
+//By Mailtrap
+
+export const sendMail = async (text) => {
+  const transporter = createTransport({
+    host: process.env.SMTP_HOST,
+    port: process.env.SMTP_PORT,
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASSWORD,
+    },
+  });
+
+  await transporter.sendMail({
+    subject: "CONTACT REQUEST FROM PORTFOLIO",
+    to: process.env.MY_MAIL,
+    from: process.env.MY_MAIL,
+    text,
+  },(err,info)=>{
+    if(err){
+      return err
+    }
+    else{
+      return info
+    }
+  });
+};
+
+
