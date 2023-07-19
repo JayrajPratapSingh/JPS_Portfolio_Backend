@@ -78,6 +78,7 @@ export const getUser = async(req, res) =>{
 export const myProfile = async(req, res) =>{
     try{
         const user = await User.findById(req.user._id);
+        
         res.status(200).json({
             sucess:true,
             user,
@@ -116,8 +117,10 @@ export const contact = async(req, res) =>{
 export const updateUser = async(req, res) =>{
     try{
         const user = await User.findById(req.user._id);
+        
 
-        const {name, email, password,skills, about} =req.body;
+        const {name, email, password,skills, about} = req.body;
+        console.log(name, email, password)
 
         if(name){
             user.name = name;
@@ -129,7 +132,7 @@ export const updateUser = async(req, res) =>{
         }
 
         if(password){
-            user.password = password
+            user.password = password;
         }
 
         if(skills){
@@ -326,26 +329,25 @@ export const addProject= async(req, res) =>{
 // Deleliting Timeline
 
 export const deleteTimeline = async(req, res) =>{
-    try{
-        const {id} = req.params;
-        
+    try {
+        const { id } = req.params;
+    
         const user = await User.findById(req.user._id);
-       user.timeline = user.timeline.filter((item)=>{
-        item._id != id
-       })
-
-        await user.save()
+    
+        user.timeline = user.timeline.filter((item) => item._id != id);
+    
+        await user.save();
+    
         res.status(200).json({
-            sucess:true,
-            message:"Deleted from Timeline"
-        })
-    }
-    catch(error){
+          success: true,
+          message: "Deleted from Timline",
+        });
+      } catch (error) {
         return res.status(400).json({
-            sucess:false,
-            message:error.message,
-        })
-    }
+          success: false,
+          message: error.message,
+        });
+      }
 }
 
 //Deleting Youtube
