@@ -4,6 +4,7 @@ import jwt from "jsonwebtoken"
 import cloudinary from "cloudinary"
 
 
+
 // Varification for admin login
 
 export const login = async(req,res)=>{
@@ -16,14 +17,15 @@ export const login = async(req,res)=>{
                 message:"Invalid email or password",
             })
         }
-        const token = jwt.sign({_id:user._id}, process.env.JWT_SECRET);
+        const token = jwt.sign({_id:user._id}, process.env.JWT_SECRET)
         res.status(200).cookie('token', token, {
-            expires:new Date(Date.now() + 10*60*1000),
+            expires:new Date(Date.now() + 6000000),
             httpOnly:true
         }).json({
             sucess:true,
             message:"Logged In Sucessfully"
         })
+        
     }
     catch(error){
         return res.status(400).json({
