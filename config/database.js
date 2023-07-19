@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
-const dbURI = process.env.DATABASE
-export const ConnectDatabase = ()=> {mongoose.connect(dbURI, {
+export const ConnectDatabase = ()=> {mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   } ).then((c)=>{
