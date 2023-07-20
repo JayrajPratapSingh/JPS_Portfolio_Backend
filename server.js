@@ -1,7 +1,7 @@
 import {app} from "./App.js"
 import dotenv from "dotenv"
 import cloudinary from "cloudinary"
-dotenv.config({path:"./config/config.env"}) || dotenv.config()
+dotenv.config()
 const PORT = process.env.PORT || 4000
 import { ConnectDatabase } from "./config/database.js";
 ConnectDatabase()

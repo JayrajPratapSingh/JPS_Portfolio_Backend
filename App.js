@@ -4,6 +4,7 @@ export const app = express()
 import cors from "cors"
 app.use(cors({
     origin:"https://jps-portfolio-frontend.vercel.app/",
+    method:["POST", "GET", "PUT","DELETE","PATCH"],
     credentials:true,
 }));
 app.use(express.json({limit:"50mb"}))
